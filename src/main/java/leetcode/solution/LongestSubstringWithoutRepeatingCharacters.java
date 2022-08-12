@@ -1,6 +1,7 @@
 package leetcode.solution;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
@@ -9,20 +10,30 @@ import java.util.HashMap;
  */
 public class LongestSubstringWithoutRepeatingCharacters {
 
-    public int lengthOfLongestSubstring(String s) {
+    public static int lengthOfLongestSubstring(String s) {
         if (s.length() == 0) {
+
             return 0;
         }
-        HashMap<Character, Integer> map = new HashMap<>();
-        int max = 0;
-        int left = 0;
+        Map<Character, Integer> charIndexMap = new HashMap<>();
+        int max = 1;
+        int start = 0;
         for (int i = 0; i < s.length(); i++) {
-            if (map.containsKey(s.charAt(i))) {
-                left = Math.max(left, map.get(s.charAt(i)) + 1);
+            char c = s.charAt(i);
+            Integer index = charIndexMap.get(c);
+            if (index != null && index >= start) {
+                max = Math.max(max, i - start);
+                start = index + 1;
+            }else {
+                max = Math.max(max, i - start + 1);
             }
-            map.put(s.charAt(i), i);
-            max = Math.max(max, i - left + 1);
+            charIndexMap.put(c, i);
         }
+
         return max;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(lengthOfLongestSubstring("abcabcbb"));
     }
 }

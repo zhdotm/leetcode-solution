@@ -32,7 +32,7 @@ public class AddTwoNumbers {
         }
     }
 
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode resultListNode = new ListNode();
         ListNode currentListNode = resultListNode;
         boolean isNeedPlusOne = Boolean.FALSE;
